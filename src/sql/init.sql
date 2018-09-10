@@ -1,6 +1,6 @@
-CREATE DATABASE hkstock CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE datacolle CHARACTER SET utf8 COLLATE utf8_general_ci;
 
-CREATE TABLE hkstock.stock (
+CREATE TABLE datacolle.stock_map (
 	symbol INT NOT NULL COMMENT 'javatype=int;',
 	chineseName varchar(100) NOT NULL COMMENT 'javatype=String;',
 	isHSI bit(0) NOT NULL DEFAULT b'0' COMMENT 'javatype=boolean;',
@@ -10,7 +10,7 @@ ENGINE=InnoDB
 DEFAULT CHARSET=utf8
 COLLATE=utf8_general_ci ;
 
-CREATE TABLE hkstock.record (
+CREATE TABLE datacolle.stock_instant_record (
   rowId INT NOT NULL AUTO_INCREMENT COMMENT 'javatype=int;',
 	symbol INT NOT NULL COMMENT 'javatype=int;',
 	recordDt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'javatype=String;',
@@ -21,7 +21,7 @@ ENGINE=InnoDB
 DEFAULT CHARSET=utf8
 COLLATE=utf8_general_ci ;
 
-CREATE TABLE hkstock.daily_record (
+CREATE TABLE datacolle.stock_daily_record (
   rowId INT NOT NULL AUTO_INCREMENT COMMENT 'javatype=int;',
 	symbol INT NOT NULL COMMENT 'javatype=int;',
 	recordDt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'javatype=String;',
