@@ -32,7 +32,7 @@ public class ScheduledCollectDataService {
         logger.info("scheduledGetDailyStockReport END");
     }
 
-    @Scheduled(fixedRate = 1000)
+    @Scheduled(fixedRate = 300000)
     public void scheduledGetInstantStockReport() throws Exception {
         logger.info("scheduledGetInstantStockReport START");
         SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
