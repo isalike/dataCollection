@@ -70,7 +70,7 @@ public class StockService {
 
     public String insertOneData(String symbol,String data){
         try{
-            String sql = "INSERT INTO stock_instant_record(symbol,recordDt,value) VALUES ("+symbol+","+CommonFunction.getNow()+","+data+");";
+            String sql = "INSERT INTO stock_instant_record(symbol,recordDt,value) VALUES ("+symbol+",'"+CommonFunction.getNow()+"',"+data+");";
             jdbcTemplate.execute(sql);
         }catch (Exception e){
         }

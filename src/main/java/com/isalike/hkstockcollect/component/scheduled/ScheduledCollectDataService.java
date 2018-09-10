@@ -32,19 +32,18 @@ public class ScheduledCollectDataService {
         logger.info("scheduledGetDailyStockReport END");
     }
 
-    @Scheduled(cron = "${scheduledGetInstantStockReport.cronExpression}")
+    @Scheduled(fixedRate = 1000)
     public void scheduledGetInstantStockReport() throws Exception {
         logger.info("scheduledGetInstantStockReport START");
-//        SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
-//        Date start = parser.parse("09:25");
-//        Date end = parser.parse("16:10");
-//        Date userDate = parser.parse(CommonFunction.getNow());
-//        if (userDate.after(start) && userDate.before(end)) {
-//            retrun "ok";
-//        }
-        for (Map.Entry<String, String> entry : Stock.hsiStock.entrySet()) {
-            String result = stockService.getOneNow(entry.getKey());
-            stockService.insertOneData(entry.getKey(),result);
+        SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
+        Date start = parser.parse("09:25");
+        Date end = parser.parse("16:10");
+        Date userDate = parser.parse(parser.format(new Date()));
+        if (userDate.after(start) && userDate.before(end)) {
+            for (Map.Entry<String, String> entry : Stock.hsiStock.entrySet()) {
+                String result = stockService.getOneNow(entry.getKey());
+                stockService.insertOneData(entry.getKey(),result);
+            }
         }
         logger.info("scheduledGetInstantStockReport END");
     }
