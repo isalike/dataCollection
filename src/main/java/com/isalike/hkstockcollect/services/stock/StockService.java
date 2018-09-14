@@ -38,6 +38,19 @@ public class StockService {
         }
     }
 
+    public String getStockData(String index,String startDt,String endDt)throws Exception{
+        while(index.length()<5){
+            index = 0 + index;
+        }
+        Document docs = Jsoup.connect("https://www.quandl.com/api/v3/datasets/HKEX/"+index+"?start_date="+startDt+"&end_date="+endDt+"&api_key=YPPWmoxrefDGxKVfKyuv").get();
+//        Document docs = Jsoup.connect("https://www.quandl.com/api/v3/datasets/HKEX/"+index+"?api_key=YPPWmoxrefDGxKVfKyuv").get();
+        Element a = docs.select("pre code").first();
+        String temp = a.childNode(0).toString().replace("\n","").replace("{  \"dataset\": ","");
+        HashMap<String,Object> result =
+                new ObjectMapper().readValue(temp.substring(0,temp.length()-1), HashMap.class);
+        return insertData(index,result.get("data").toString());
+    }
+
     public String getStockDataFromPast(String index) throws Exception{
         while(index.length()<5){
             index = 0 + index;

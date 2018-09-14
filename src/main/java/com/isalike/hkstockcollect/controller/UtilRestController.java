@@ -17,24 +17,21 @@ import java.util.Map;
 public class UtilRestController {
     @Autowired
     private StockService stockService;
-    @RequestMapping(value="/test")
-    public String test(@RequestParam(value = "index", required = true) String index){
-        return stockService.getOneNow(index);
-    }
-
-    @RequestMapping(value="/test2")
-    public String test2(){
+    @RequestMapping(value="/getOne")
+    public String test(@RequestParam(value = "startDt", required = true) String startDt,
+                       @RequestParam(value = "endDt", required = true) String endDt){
         try{
-            SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
-            Date start = parser.parse("09:25");
-            Date end = parser.parse("16:10");
-            Date userDate = parser.parse(parser.format(new Date()));
-            if (userDate.after(start) && userDate.before(end)) {
-                return "ok";
+            for (Map.Entry<String, String> entry : Stock.hsiStock.entrySet()) {
+                stockService.getStockData(entry.getKey(),startDt,endDt);
             }
         }catch (Exception e){
 
         }
+        return "ok";
+    }
+
+    @RequestMapping(value="/test")
+    public String test(){
         return "ok";
     }
 
